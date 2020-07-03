@@ -30,7 +30,7 @@ are beneficial are:
 
 ## Starter Code
 
-The sources are as follows:
+The scripts, stored in `/scripts`, are as follows:
 
 - Helicopter.jl: the initial global optimization performed using the
   basic physical equations.

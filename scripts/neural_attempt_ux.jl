@@ -1,6 +1,6 @@
 using Pkg
 cd(@__DIR__)
-Pkg.activate("."); Pkg.instantiate()
+Pkg.activate("../"); Pkg.instantiate()
 
 using Plots; gr()
 using LaTeXStrings
@@ -16,7 +16,7 @@ using Flux
 using Zygote
 
 # Plot path
-figpath = "figs/";
+figpath = "../figs/";
 # Linewidths and styles
 LW1 = 2.5
 LW2 = 1.5
@@ -32,7 +32,7 @@ LA2 = 0.7
 LA3 = 0.3
 ;
 
-df=CSV.read("data/Lab-Helicopter_Experimental-data.csv")
+df=CSV.read("../data/Lab-Helicopter_Experimental-data.csv")
 ENV["COLUMNS"]=100 # change the number of IJulia columns from default 80 to 100
 df[1:5,:]
 
@@ -54,15 +54,15 @@ Psi = ConstantInterpolation(psi,tm);
 u_t = (th=U_th, psi=U_psi)
 rad2deg(t,u) = (t,u*180/pi)
 
-include("optimization_results/globaloptimizationresults.jl")
+include("../optimization_results/globaloptimizationresults.jl")
 
 ###############
-## Now go neural, only u(t) affector
+## Now go neural, nonlinear K
 ###############
 
-model_univ_u = FastChain(FastDense(2, 16, tanh),
+model_univ_ux = FastChain(FastDense(6, 16, tanh),
                        FastDense(16, 2))
-pinit = initial_params(model_univ_u)/1000
+pinit = initial_params(model_univ_ux)/1000
 
 function helicopter_uode(dx,x,Ps,P0,u,p,t)
 # P0 = (rc=rc,h=h,m=m,Jbc=Jbc,Js=Js,g=g,K_th_th=K_th_th,K_th_psi=K_th_psi,K_psi_th=K_psi_th,K_psi_psi=K_psi_psi,D_th=D_th,D_psi=D_psi);
@@ -72,7 +72,7 @@ function helicopter_uode(dx,x,Ps,P0,u,p,t)
     w_psi = x[4]
 
     U = [u.th(t),u.psi(t)]
-    K = model_univ_u(U,p)
+    K = model_univ_ux([U;x],p)
     #
     M11 = Ps[4]*P0.Jbc + Ps[3]*P0.m*((Ps[1]*P0.rc)^2+(Ps[2]*P0.h)^2)
     M22 = Ps[4]*P0.Jbc*cos(th)^2 + Ps[3]*P0.m*(Ps[1]*P0.rc*cos(th)-Ps[2]*P0.h*sin(th))^2 + Ps[5]*P0.Js
@@ -127,42 +127,42 @@ end
 
 callback(pinit,uode_cost(pinit))
 
-result_univ_u1 = DiffEqFlux.sciml_train(uode_cost, pinit,
+result_univ1_ux = DiffEqFlux.sciml_train(uode_cost, pinit,
                                      ADAM(0.001), maxiters = 100,
                                      cb = callback)
 
-result_univ_u2 = DiffEqFlux.sciml_train(uode_cost, result_univ_u1.minimizer,
+result_univ2_ux = DiffEqFlux.sciml_train(uode_cost, result_univ1_ux.minimizer,
                                      BFGS(initial_stepnorm = 0.01), maxiters = 100,
                                      cb = callback)
 
-pnn = result_univ_u2.minimizer
-prob = ODEProblem(uode_f!,x0_best,tspan,pnn)
-sol_u = solve(prob, AutoTsit5(TRBDF2(autodiff=false)), saveat=dt)
+prob_ux = ODEProblem(uode_f!,x0_best,tspan,result_univ2_ux.minimizer)
+#
+sol_ux = solve(prob_ux,AutoTsit5(TRBDF2(autodiff=false)),reltol=1e-6);
 
-plot(sol_u,vars=(rad2deg,0,1),lw=LW1,lc=LC1,label=L"$\theta$")
+plot(sol_ux,vars=(rad2deg,0,1),lw=LW1,lc=LC1,label=L"$\theta$")
 plot!(tm,theta*180/pi,lw=LW1,ls=LS2,lc=LC2,label=L"\theta^\mathrm{d}")
 plot!(xlim = tspan,xlabel=L"time $t$ [s]", ylabel=L"$\theta$ [$^\circ$]")
-plot!(title="Pitch angle: model+FNN(u) (blue) vs. data (red)",box=true)
-figname="Helicopter_pitch-angle_model_fit_FNN_u.svg"
+plot!(title="Pitch angle: model+FNN(u,x) (blue) vs. data (red)",box=true)
+figname="Helicopter_pitch-angle_model_fit_FNN_u-x.svg"
 savefig(figpath*figname)
 
-plot(sol_u,vars=(rad2deg,0,2),lw=LW1,lc=LC1,label=L"$\psi$")
+plot(sol_ux,vars=(rad2deg,0,2),lw=LW1,lc=LC1,label=L"$\psi$")
 plot!(tm,psi*180/pi,lw=LW1,ls=LS2,lc=LC2,label=L"\psi^\mathrm{d}")
 plot!(xlim = tspan,xlabel=L"time $t$ [s]", ylabel=L"$\psi$ [$^\circ$]")
-plot!(title="Yaw angle: model+FNN(u) (blue) vs. data (red)",box=true)
-figname="Helicopter_yaw-angle_model_fit_FNN_u.svg"
+plot!(title="Yaw angle: model+FNN(u,x) (blue) vs. data (red)",box=true)
+figname="Helicopter_yaw-angle_model_fit_FNN_u-x.svg"
 savefig(figpath*figname)
 
 # Summarizing results to file
-pnn = result_univ_u2.minimizer
+pnn = result_univ2_ux.minimizer
 prob = ODEProblem(uode_f!,x0_best,tspan,pnn)
 sol = solve(prob, AutoTsit5(TRBDF2(autodiff=false)), saveat=dt)
-U(t) = [u_t.th(t);u_t.psi(t)]
-u_u_ts = U.(sol.t)
-K_u_ts = model_univ_u.(u_u_ts,(pnn,))
+U(t) = [u_t.th(t);u_t.psi(t);sol(t)]
+u_ux_ts = U.(sol.t)
+K_ux_ts = model_univ_ux.(u_ux_ts,(pnn,))
 
-open("optimization_results/neural_augmentation_results_u.jl", "w") do f
-    write(f,"pnn = $(result_univ_u2.minimizer) \n")
-    write(f,"utimeseries = $(u_u_ts) \n")
-    write(f,"Ktimeseries = $(K_u_ts) \n")
+open("../optimization_results/neural_augmentation_results_ux.jl", "w") do f
+    write(f,"pnn = $(result_univ2_ux.minimizer) \n")
+    write(f,"utimeseries = $(u_ux_ts) \n")
+    write(f,"Ktimeseries = $(K_ux_ts) \n")
 end

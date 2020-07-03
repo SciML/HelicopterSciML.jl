@@ -1,6 +1,6 @@
 using Pkg
 cd(@__DIR__)
-Pkg.activate("."); Pkg.instantiate()
+Pkg.activate("../"); Pkg.instantiate()
 
 using Plots; gr()
 using LaTeXStrings
@@ -15,7 +15,7 @@ using BlackBoxOptim
 using BenchmarkTools
 
 # Plot path
-figpath = "figs/";
+figpath = "../figs/";
 # Linewidths and styles
 LW1 = 2.5
 LW2 = 1.5
@@ -101,7 +101,7 @@ plot!(xlim = tspan,xlabel=L"time $t$ [s]")
 figname="Helicopter_theoretical_simulation.svg"
 savefig(figpath*figname)
 
-df=CSV.read("data/Lab-Helicopter_Experimental-data.csv")
+df=CSV.read("../data/Lab-Helicopter_Experimental-data.csv")
 ENV["COLUMNS"]=100 # change the number of IJulia columns from default 80 to 100
 df[1:5,:]
 
@@ -238,7 +238,7 @@ collect(zip(keys(P0),Ps_best.*values(P0)))
 # Nominal parameters, taken from laboratory task description (and rounded somewhat)
 P0
 
-open("optimization_results/globaloptimizationresults.jl", "w") do f
+open("../optimization_results/globaloptimizationresults.jl", "w") do f
     write(f,"P0 = $P0 \n")
     write(f,"Ps_best = $Ps_best \n")
     write(f,"x0_best = $x0_best \n")
