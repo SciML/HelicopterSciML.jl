@@ -1,0 +1,21 @@
+Sparse Identification Result
+No. of Parameters : 3
+Active terms : 3
+   Equation 1 : 1
+   Equation 2 : 2
+Overall error (L2-Norm) : 0.1630423307080773
+   Equation 1 : 0.02125733322469153
+   Equation 2 : 0.14178499748338577
+AICC :
+   Equation 1 : 17.405129641224068
+   Equation 2 : 11.815606504734244
+
+SR3{Float64,UnionAll}(0.00125594321575479, 1.0, ProximalOperators.NormL1) converged after 421 iterations.
+
+
+2 dimensional basis in ["u₁", "u₂"]
+
+f_1 = cos(u₂) * -0.0008207028886272424
+f_2 = cos(u₂) * -0.0136334203255997 + u₂ ^ 2 * 0.007762231453499321
+
+parameters = [-0.0008207028886272424, -0.0136334203255997, 0.007762231453499321] 
