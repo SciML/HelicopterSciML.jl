@@ -5,6 +5,10 @@ problem is centered on automatically discovering physically-realistic
 augmentations to a model of a laboratory helicopter to better predict
 the movement.
 
+## Video Introduction
+
+https://web01.usn.no/~roshans/mpc/videos/Heli_deadband_effect.mp4
+
 ## Goals of the Challenge
 
 The challenge is multi-faceted and there is no single number to determine
