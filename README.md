@@ -5,9 +5,12 @@ problem is centered on automatically discovering physically-realistic
 augmentations to a model of a laboratory helicopter to better predict
 the movement.
 
-## Video Introduction
+## Video Introduction to the Dataset
 
-https://web01.usn.no/~roshans/mpc/videos/Heli_deadband_effect.mp4
+For an introduction to the dataset, how it was collected, the associated
+challenges, please see the following video:
+
+[![SciML Helicopter Video](https://user-images.githubusercontent.com/1814174/86542514-45238c80-bee4-11ea-801f-57fc959e2f2e.PNG)](https://youtu.be/2g1-sDZ3BVw)
 
 ## Goals of the Challenge
 
