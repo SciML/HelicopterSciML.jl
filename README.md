@@ -30,9 +30,10 @@ angles are measured.
 
 The challenge is to predict the future state of the yaw and pitch angles given the current known states
 and inputs. The challenge is open ended, as in, the best predictor is not necessarily the most useful
-predictor so a simple number is cannot be used to judge how good a solution is: a neural network can
+predictor so a simple number is cannot be used to judge how good a solution is. A neural network can
 remember and predict the data exactly, but that's not interesting! What we are looking for is new physical
-equations, augmentations and changes to the original model, that make better predictions. These augmentations
+equations, augmentations and changes to the original model, that make better predictions and explain the
+effects (and their importance) which are left out of the original derivation. These augmentations
 should be physically justifiable (though subjective, rigorous first principles physics should be used
 to justify the possible explanation for any predictive terms) and should be automatically generated using
 some programmatic approach. The goal is to figure out how to have computers automatically improve physical
