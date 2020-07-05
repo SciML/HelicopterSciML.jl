@@ -34,6 +34,14 @@ are beneficial are:
   validated are deemed advantageous to models that are a blackbox
   and can only be validated by the exact time series data that is
   used for training/testing.
+  
+## Detailed Description of the Challenge Problem
+
+A detailed description of the challenge problem can be found in the
+[challenge problem write-up](https://github.com/ChrisRackauckas/HelicopterSciML.jl/blob/master/papers/Hybrid_Helicopter_model.pdf)
+which explains the derivation of the helicpter model, the data source,
+the current fits, and the current experiments in automated physical
+augmentation discovery.
 
 ## Starter Code
 
