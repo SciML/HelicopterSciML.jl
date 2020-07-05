@@ -25,7 +25,7 @@ system**
 The first principle physics model makes fairly good predictions for the evolution
 of the pitch angle but does is not a great predictor of the yaw angle:
 
-![](https://user-images.githubusercontent.com/1814174/86542748-67b6a500-bee6-11ea-995a-125e2bc9b0e3.PNG)
+![](https://user-images.githubusercontent.com/1814174/86543289-2379d380-beeb-11ea-85f6-3e6a3adc238b.PNG)
 
 ![](https://user-images.githubusercontent.com/1814174/86542796-f4616300-bee6-11ea-852e-3ac1d0b06bda.PNG)
 
@@ -33,7 +33,7 @@ Initial attempts at automated discovery at the missing physical equations
 utilized [universal differential equations](https://arxiv.org/abs/2001.04385)
 to discover missing friction terms in ths torque:
 
-![](https://user-images.githubusercontent.com/1814174/86543289-2379d380-beeb-11ea-85f6-3e6a3adc238b.PNG)
+![](https://user-images.githubusercontent.com/1814174/86542748-67b6a500-bee6-11ea-995a-125e2bc9b0e3.PNG)
 
 The model with this automatically discovered terms has an improved fit to the yaw angle:
 
