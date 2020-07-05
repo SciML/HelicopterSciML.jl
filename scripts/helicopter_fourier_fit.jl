@@ -31,6 +31,7 @@ D_th = 1e-2 # Nm/(rad/s)
 D_psi = 8e-2 # Nm/(rad/s)
 
 # Graphics
+figpath = "../figs/"
 LW1 = 2.5
 LW2 = 1.5
 LS1 = :solid
@@ -45,7 +46,7 @@ LA2 = 0.7
 LA3 = 0.3
 
 # Parse data from table
-df=CSV.read("/Users/diogo/UROP/Hybrid_Helicopter_model/data/Lab-Helicopter_Experimental-data.csv")
+df=CSV.read("../data/Lab-Helicopter_Experimental-data.csv")
 ENV["COLUMNS"]=100 # change the number of IJulia columns from default 80 to 100
 df[1:5,:]
 u_th = df[:,1]
@@ -126,5 +127,21 @@ callback = function (p, l)
     return false
 end
 res = DiffEqFlux.sciml_train(uode_cost, α, ADAM(0.01), cb = callback, maxiters = 150)
-
 p = res.minimizer
+
+prob = ODEProblem(helicopter!,x0,tspan,p)
+sol_final = solve(prob, AutoTsit5(TRBDF2(autodiff=false)), saveat=dt)
+
+plot(sol_final,vars=(rad2deg,0,1),lw=LW1,lc=LC1,label=L"$\theta$")
+plot!(tm,theta*180/pi,lw=LW1,ls=LS2,lc=LC2,label=L"\theta^\mathrm{d}")
+plot!(xlim = tspan,xlabel=L"time $t$ [s]", ylabel=L"$\theta$ [$^\circ$]")
+plot!(title="Pitch angle: model+TensorLayer(u) (blue) vs. data (red)",box=true)
+figname="Helicopter_pitch-angle_model_fit_tensor_layer_u.svg"
+savefig(figpath*figname)
+
+plot(sol_final,vars=(rad2deg,0,2),lw=LW1,lc=LC1,label=L"$\theta$")
+plot!(tm,psi*180/pi,lw=LW1,ls=LS2,lc=LC2,label=L"\theta^\mathrm{d}")
+plot!(xlim = tspan,xlabel=L"time $t$ [s]", ylabel=L"$\theta$ [$^\circ$]")
+plot!(title="Yaw angle: model+TensorLayer(u) (blue) vs. data (red)",box=true)
+figname="Helicopter_yaw-angle_model_fit_tensor_layer_u.svg"
+savefig(figpath*figname)
