@@ -62,7 +62,7 @@ timeseriesdata = [theta';psi']
 A = fill(FourierBasis(2), 6)
 nn1 = TensorLayer(A, 2)
 N1 = size(nn1.p)[1]
-α = zeros(N1+6)
+α = randn(N1+6)/1000
 
 function helicopter_uode(dx,x,Ps,P0,u,p,t)
 # P0 = (rc=rc,h=h,m=m,Jbc=Jbc,Js=Js,g=g,K_th_th=K_th_th,K_th_psi=K_th_psi,K_psi_th=K_psi_th,K_psi_psi=K_psi_psi,D_th=D_th,D_psi=D_psi);
