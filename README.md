@@ -34,6 +34,7 @@ utilized [universal differential equations](https://arxiv.org/abs/2001.04385)
 to discover missing friction terms in ths torque:
 
 ![](https://user-images.githubusercontent.com/1814174/86543289-2379d380-beeb-11ea-85f6-3e6a3adc238b.PNG)
+
 The model with this automatically discovered terms has an improved fit to the yaw angle:
 
 ![](https://user-images.githubusercontent.com/1814174/86542905-e3652180-bee7-11ea-9e02-ecffb9662b56.PNG)
