@@ -16,9 +16,27 @@ the movement. This problem is hard because it is realistic:
   problem: we wish to understand the acutal physics instead of simply making
   predictions.
 
-**The goal of this challenge is to utilize automated tools to discover a
+**This challenge is an open-ended problem to find realistic equations.
+The goal of this challenge is to utilize automated tools to discover a
 physcially-explainable model that accurately predicts the dynamics of the
-system**
+system**.
+
+## Introduction to the Model, Data, and Challenge
+
+A first principles model for the helicopter systems is derived in [the challenge problem write-up](https://github.com/ChrisRackauckas/HelicopterSciML.jl/blob/master/papers/Hybrid_Helicopter_model.pdf).
+On this system the electrical inputs to the rotories (u(t)) are known and are used to turn up and down
+the propellers. These then effect the state variables of the system (x(t)), of which the pitch and yaw
+angles are measured.
+
+The challenge is to predict the future state of the yaw and pitch angles given the current known states
+and inputs. The challenge is open ended, as in, the best predictor is not necessarily the most useful
+predictor so a simple number is cannot be used to judge how good a solution is: a neural network can
+remember and predict the data exactly, but that's not interesting! What we are looking for is new physical
+equations, augmentations and changes to the original model, that make better predictions. These augmentations
+should be physically justifiable (though subjective, rigorous first principles physics should be used
+to justify the possible explanation for any predictive terms) and should be automatically generated using
+some programmatic approach. The goal is to figure out how to have computers automatically improve physical
+equations in a way that can lead to greater understanding of systems from data.
 
 ## Initial Results
 
