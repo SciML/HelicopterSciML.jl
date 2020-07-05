@@ -5,14 +5,16 @@ problem is centered on automatically discovering physically-realistic
 augmentations to a model of a laboratory helicopter to better predict
 the movement. This problem is hard because it is realistic:
 
-- There is not enough data to make a giant neural network or linear regression
-  work: this problem requires input of some scientific knowledge!
 - We do not have data from every single detail about the helicopter.
   We know the electrical signals that are being sent to the rotories
   and we know the measurements of yaw and pitch angles, but there are
   many hidden variables that are not able to be measured.
 - While it is govered by physical first principles, these first principles
   do not describe the whole system. 
+- Since our goal is to understand the helicopter system, simply training
+  a neural network or performing reinforcement learning does not solve the
+  problem: we wish to understand the acutal physics instead of simply making
+  predictions.
 
 **The goal of this challenge is to utilize automated tools to discover a
 physcially-explainable model that accurately predicts the dynamics of the
