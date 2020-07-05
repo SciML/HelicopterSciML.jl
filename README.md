@@ -82,7 +82,9 @@ The scripts, stored in `/scripts`, are as follows:
   basic physical equations.
 - neural_attempts.jl: the attempted neural augmentation strategies.
   In `_u` the approach is making K nonlinear in u(t), and `_ux`
-  allows for the addition of new state-dependent terms.
+  allows for the addition of new state-dependent terms. Additionally,
+  fourier_attempt showcases using the Fourier basis for learning a
+  similar universal approximator.
 - equation_discovery.jl: the sparsification of the discovered neural
   neural network. Results in the determination of new physical equations
   and a plot of the accuracy. `_u` is for a version that only is trained
