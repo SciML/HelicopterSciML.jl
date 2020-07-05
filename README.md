@@ -40,7 +40,7 @@ The model with this automatically discovered terms has an improved fit to the ya
 ![](https://user-images.githubusercontent.com/1814174/86542905-e3652180-bee7-11ea-9e02-ecffb9662b56.PNG)
 
 Still, it is clear that there are many aspects of the model that can be improved, such as adding deadband
-effects. A more detailed introduction to the current results can be found in [the challenge problem write-up](https://github.com/ChrisRackauckas/HelicopterSciML.jl/blob/master/papers/Hybrid_Helicopter_model.pdf)
+effects. A more detailed introduction to the current results can be found in [the challenge problem write-up](https://github.com/ChrisRackauckas/HelicopterSciML.jl/blob/master/papers/Hybrid_Helicopter_model.pdf).
 
 ## Video Introduction to the Dataset
 
