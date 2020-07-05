@@ -3,8 +3,37 @@
 This is a repository for the helicopter SciML challenge problem. The
 problem is centered on automatically discovering physically-realistic
 augmentations to a model of a laboratory helicopter to better predict
-the movement.
+the movement. This problem is hard because it is realistic:
 
+- There is not enough data to make a giant neural network or linear regression
+  work: this problem requires input of some scientific knowledge!
+- We do not have data from every single detail about the helicopter.
+  We know the electrical signals that are being sent to the rotories
+  and we know the measurements of yaw and pitch angles, but there are
+  many hidden variables that are not able to be measured.
+- While it is govered by physical first principles, these first principles
+  do not describe the whole system. 
+
+**The goal of this challenge is to utilize automated tools to discover a
+physcially-explainable model that accurately predicts the dynamics of the
+system**
+
+## Initial Results
+
+Initial attempts at automated discovery at the missing physical equations
+utilized [universal differential equations](https://arxiv.org/abs/2001.04385)
+to discover missing friction terms in ths torque:
+
+![](https://user-images.githubusercontent.com/1814174/86542748-67b6a500-bee6-11ea-995a-125e2bc9b0e3.PNG)
+
+The first principles model makes predictions like:
+
+![](https://user-images.githubusercontent.com/1814174/86542796-f4616300-bee6-11ea-852e-3ac1d0b06bda.PNG)
+
+while the model with this automatically discovered terms has an improved fit:
+
+![](https://user-images.githubusercontent.com/1814174/86542905-e3652180-bee7-11ea-9e02-ecffb9662b56.PNG)
+  
 ## Video Introduction to the Dataset
 
 For an introduction to the dataset, how it was collected, the associated
