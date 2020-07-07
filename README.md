@@ -126,3 +126,9 @@ The other folders are:
 
 At the top level there is a Project.toml and Manifest.toml for
 reproducibility.
+
+## Resources
+
+- [SciML](https://sciml.ai/)
+- [Universal Differential Equations for Scientific Machine Learning](https://arxiv.org/abs/2001.04385)
+- [DiffEqFlux.jl](https://github.com/SciML/DiffEqFlux.jl)
