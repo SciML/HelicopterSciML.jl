@@ -18,7 +18,7 @@ the movement. This problem is hard because it is realistic:
 
 **This challenge is an open-ended problem to find realistic equations.
 The goal of this challenge is to utilize automated tools to discover a
-physcially-explainable model that accurately predicts the dynamics of the
+physically-explainable model that accurately predicts the dynamics of the
 system**.
 
 ## Introduction to the Model, Data, and Challenge
