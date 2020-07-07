@@ -1,4 +1,4 @@
-# Helicopter SciML Challenge Problem
+# Helicopter Scientific Machine Learning (SciML) Challenge Problem
 
 This is a repository for the helicopter SciML challenge problem. The
 problem is centered on automatically discovering physically-realistic
