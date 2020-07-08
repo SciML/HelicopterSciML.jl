@@ -9,11 +9,11 @@ the movement. This problem is hard because it is realistic:
   We know the electrical signals that are being sent to the rotories
   and we know the measurements of yaw and pitch angles, but there are
   many hidden variables that are not able to be measured.
-- While it is govered by physical first principles, these first principles
+- While it is governed by physical first principles, these first principles
   do not describe the whole system. 
 - Since our goal is to understand the helicopter system, simply training
   a neural network or performing reinforcement learning does not solve the
-  problem: we wish to understand the acutal physics instead of simply making
+  problem: we wish to understand the actual physics instead of simply making
   predictions.
 
 **This challenge is an open-ended problem to find realistic equations.
