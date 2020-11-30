@@ -1,5 +1,7 @@
 # Helicopter Scientific Machine Learning (SciML) Challenge Problem
 
+[![Build Status](https://github.com/SciML/HelicopterSciML.jl/workflows/CI/badge.svg)](https://github.com/SciML/HelicopterSciML.jl/actions?query=workflow%3ACI)
+
 This is a repository for the helicopter SciML challenge problem. The
 problem is centered on automatically discovering physically-realistic
 augmentations to a model of a laboratory helicopter to better predict
